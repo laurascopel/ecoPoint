@@ -6,3 +6,4 @@ public enum StatusSolicitacao {
     RECUSADA,
     CONCLUIDA
 }
+

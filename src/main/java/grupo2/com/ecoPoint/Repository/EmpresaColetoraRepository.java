@@ -11,6 +11,6 @@ import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 public interface EmpresaColetoraRepository extends CrudRepository<EmpresaColetora, Integer> {
     
     List<EmpresaColetora> findAll();
-    
-    EmpresaColetora findEmpresaColetoraById(int id);
+    List<EmpresaColetora> findByItensQueRecebe_Id(Long itemId);
+    EmpresaColetora findEmpresaColetoraById(Long id);
 }

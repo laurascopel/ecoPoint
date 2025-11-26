@@ -2,6 +2,7 @@ package grupo2.com.ecoPoint.Service;
 
 import java.util.List;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.stereotype.Service;
 
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
@@ -12,9 +13,17 @@ public class EmpresaColetoraService {
 
     private final EmpresaColetoraRepository empresaColetoraRepository;
 
-
-    public EmpresaColetoraService(EmpresaColetoraRepository empresaColetoraRepository) {
+    
+    public EmpresaColetoraService(EmpresaColetoraRepository empresaColetoraRepositor,  List<Long> idsItens) {
         this.empresaColetoraRepository = empresaColetoraRepository;
+        List<Item> itens = itemRepository.findAllById(idsItens);
+        empresa.setItensQueRecebe(itens);
+         return repository.save(empresa);
+    }
+
+    public List<EmpresaColetora> buscarPorItem(Long itemId) {
+        return EmpresaColetoraRepository.findByItensQueRecebe_Id(itemId);
+    
     }
 
     //GET

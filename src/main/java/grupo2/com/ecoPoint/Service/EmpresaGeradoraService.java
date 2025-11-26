@@ -53,8 +53,6 @@ public class EmpresaGeradoraService {
     public void deletarEmpresaGeradora(Integer id) {
         empresaGeradoraRepository.deleteById(id);
     }
-
-    
 }
 
     

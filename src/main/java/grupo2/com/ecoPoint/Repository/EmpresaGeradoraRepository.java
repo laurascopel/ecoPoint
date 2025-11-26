@@ -12,5 +12,5 @@ public interface EmpresaGeradoraRepository extends CrudRepository<EmpresaGerador
     
     List<EmpresaGeradora> findAll();
     
-    EmpresaGeradora findEmpresaGeradoraById(int id);
+    EmpresaGeradora findEmpresaGeradoraById(Long id);
 }

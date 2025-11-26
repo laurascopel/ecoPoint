@@ -1,5 +1,35 @@
 package grupo2.com.ecoPoint.Model.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class ItemResiduo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nome; // nome do resíduo, ex: "Papel", "Plástico", "Metal"
+
+    // Construtor vazio obrigatório para JPA
+    public ItemResiduo() {}
+
+    // Construtor com nome
+    public ItemResiduo(String nome) {
+        this.nome = nome;
+    }
     
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
