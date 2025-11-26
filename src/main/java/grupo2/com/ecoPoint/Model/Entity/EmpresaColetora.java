@@ -1,17 +1,22 @@
 package grupo2.com.ecoPoint.Model.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class EmpresaColetora {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String endereco;
     private LocalTime horarioFuncionamento;
+    private LocalDate data;
     private String telefone;
     private String descricao;
     private boolean anexaDoc;
@@ -19,21 +24,18 @@ public class EmpresaColetora {
     public EmpresaColetora() {
     }
 
-    public EmpresaColetora(Integer id, String nome, String endereco, LocalTime horarioFuncionamento, String telefone, String descricao, Boolean anexaDoc) {
-    this.id = id;
+    public EmpresaColetora(String nome, String endereco, LocalTime horarioFuncionamento, String telefone, String descricao, Boolean anexaDoc, LocalDate data) {
     this.nome = nome;
     this.endereco = endereco;
     this.horarioFuncionamento = horarioFuncionamento;
     this.telefone = telefone;
     this.descricao = descricao;
     this.anexaDoc = anexaDoc;
+    this.data = data;
     }
 
     public Integer getId() {
       return id;
-  }
-    public void setId(Integer id) {
-      this.id = id;
   }
 
     public String getNome() {
@@ -75,5 +77,11 @@ public class EmpresaColetora {
   }
     public void setAnexaDoc(Boolean anexaDoc) {
       this.anexaDoc = anexaDoc;
+  }
+      public LocalDate getdata() {
+      return data;
+  }
+    public void setId(LocalDate data) {
+      this.data = data;
   }
 }
