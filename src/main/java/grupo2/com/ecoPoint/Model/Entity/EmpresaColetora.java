@@ -18,14 +18,13 @@ public class EmpresaColetora {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome;
     private String endereco;
+    private String cnpj;
     private LocalTime horarioFuncionamento;
     private LocalDate data;
     private String telefone;
     private String descricao;
-    private boolean anexaDoc;
 
     @ManyToMany
     @JoinTable(
@@ -38,14 +37,14 @@ public class EmpresaColetora {
     public EmpresaColetora() {}
 
     public EmpresaColetora(String nome, String endereco, LocalTime horarioFuncionamento,
-                           String telefone, String descricao, boolean anexaDoc, LocalDate data) {
+                           String telefone, String descricao, LocalDate data, String cnpj) {
         this.nome = nome;
         this.endereco = endereco;
         this.horarioFuncionamento = horarioFuncionamento;
         this.telefone = telefone;
         this.descricao = descricao;
-        this.anexaDoc = anexaDoc;
         this.data = data;
+        this.cnpj = cnpj;
     }
 
     public Long getId() {
@@ -64,6 +63,13 @@ public class EmpresaColetora {
     }
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+     public String getCnpj() {
+        return cnpj;
+    }
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public LocalTime getHorarioFuncionamento() {
@@ -85,13 +91,6 @@ public class EmpresaColetora {
     }
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public boolean isAnexaDoc() {
-        return anexaDoc;
-    }
-    public void setAnexaDoc(boolean anexaDoc) {
-        this.anexaDoc = anexaDoc;
     }
 
     public LocalDate getData() {

@@ -24,7 +24,7 @@ public class EmpresaGeradoraService {
     }
 
     // GET BY ID
-    public EmpresaGeradora getEmpresaGeradoraById(Integer id) {
+    public EmpresaGeradora getEmpresaGeradoraById(Long id) {
         return empresaGeradoraRepository.findEmpresaGeradoraById(id);       
     }
 
@@ -34,7 +34,7 @@ public class EmpresaGeradoraService {
     }
 
     // UPDATE
-    public EmpresaGeradora atualizarEmpresaGeradora(Integer id, EmpresaGeradora novaEmpresaGeradora) {
+    public EmpresaGeradora atualizarEmpresaGeradora(Long id, EmpresaGeradora novaEmpresaGeradora) {
         EmpresaGeradora empresaGeradora = empresaGeradoraRepository.findEmpresaGeradoraById(id);
 
      if (empresaGeradora == null) {

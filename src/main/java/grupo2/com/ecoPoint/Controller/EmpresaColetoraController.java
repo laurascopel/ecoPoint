@@ -32,7 +32,7 @@ public class EmpresaColetoraController {
 
     // GET BY ID
     @GetMapping("/{id}")
-    public EmpresaColetora getEmpresaColetoraById(@PathVariable Integer id) {
+    public EmpresaColetora getEmpresaColetoraById(@PathVariable Long id) {
         return empresaColetoraService.getEmpresaColetoraById(id);
     }
 
