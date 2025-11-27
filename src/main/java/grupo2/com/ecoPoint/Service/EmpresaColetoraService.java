@@ -1,8 +1,6 @@
 package grupo2.com.ecoPoint.Service;
 
 import java.util.List;
-
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.stereotype.Service;
 
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
@@ -14,51 +12,43 @@ public class EmpresaColetoraService {
     private final EmpresaColetoraRepository empresaColetoraRepository;
 
     
-    public EmpresaColetoraService(EmpresaColetoraRepository empresaColetoraRepository,  List<Long> idsItens) {
+    public EmpresaColetoraService(EmpresaColetoraRepository empresaColetoraRepository,  Long id) {
         this.empresaColetoraRepository = empresaColetoraRepository;
     
     }
 
-    public List<EmpresaColetora> buscarPorItem(Long itemId) {
-        return empresaColetoraRepository.findByItensQueRecebe_Id(itemId);
-    
-    }
-
-    //GET
-    public List<EmpresaColetora>getAllEmpresaColetora() {
+    public List<EmpresaColetora> getAllEmpresaColetora() {
         return empresaColetoraRepository.findAll();
     }
 
-    // GET BY ID
     public EmpresaColetora getEmpresaColetoraById(Long id) {
         return empresaColetoraRepository.findEmpresaColetoraById(id);       
     }
 
-    // CREATE   
     public EmpresaColetora salvarEmpresaColetora(EmpresaColetora empresaColetora) {
         return empresaColetoraRepository.save(empresaColetora);
     }
 
-    // UPDATE
-    public EmpresaColetora atualizarEmpresaColetora(Long id, EmpresaColetora novaEmpresaColetora) {
+    public EmpresaColetora atualizarEmpresaColetora(Long id, EmpresaColetora empresaColetoraAtualizada) {
         EmpresaColetora empresaColetora = empresaColetoraRepository.findEmpresaColetoraById(id);
 
-     if (empresaColetora == null) {
+        if (empresaColetora == null) {
             throw new RuntimeException("Não existe");
         }
 
-        empresaColetora.setNome(novaEmpresaColetora.getNome());
-        empresaColetora.setEndereco(novaEmpresaColetora.getEndereco());
-        empresaColetora.setHorarioFuncionamento(novaEmpresaColetora.getHorarioFuncionamento());
-        empresaColetora.setTelefone(novaEmpresaColetora.getTelefone());
-        empresaColetora.setDescricao(novaEmpresaColetora.getDescricao());
-
+        empresaColetora.setNome(empresaColetoraAtualizada.getNome());
+        empresaColetora.setEndereco(empresaColetoraAtualizada.getEndereco());
+        empresaColetora.setCnpj(empresaColetoraAtualizada.getCnpj());
+        empresaColetora.setHorarioFuncionamento(empresaColetoraAtualizada.getHorarioFuncionamento());
+        empresaColetora.setData(empresaColetoraAtualizada.getData());
+        empresaColetora.setTelefone(empresaColetoraAtualizada.getTelefone());
+        empresaColetora.setDescricao(empresaColetoraAtualizada.getDescricao());
 
         return empresaColetoraRepository.save(empresaColetora);
+
     };
 
-    // DELETE
-    public void deletarEmpresaColetora(Integer id) {
+    public void deletarEmpresaColetora(Long id) {
         empresaColetoraRepository.deleteById(id);
     }
 }

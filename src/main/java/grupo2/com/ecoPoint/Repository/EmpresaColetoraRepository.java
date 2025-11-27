@@ -7,4 +7,7 @@ import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 
 @Repository
 public interface EmpresaColetoraRepository extends JpaRepository<EmpresaColetora, Long> {
+
+public EmpresaColetora findEmpresaColetoraById(Long id);
+
 }

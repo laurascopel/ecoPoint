@@ -7,4 +7,7 @@ import grupo2.com.ecoPoint.Model.Entity.Solicitacao;
 
 @Repository
 public interface SolicitacaoRepository extends JpaRepository<Solicitacao, Long> {
+
+public Solicitacao findSolicitacaoById(Long id);
+
 }

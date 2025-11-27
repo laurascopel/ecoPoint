@@ -13,47 +13,43 @@ public class EmpresaGeradoraService {
 
     private final EmpresaGeradoraRepository empresaGeradoraRepository;
 
-
-    public EmpresaGeradoraService(EmpresaGeradoraRepository empresaGeradoraRepository) {
+    
+    public EmpresaGeradoraService(EmpresaGeradoraRepository empresaGeradoraRepository,  Long id) {
         this.empresaGeradoraRepository = empresaGeradoraRepository;
+    
     }
 
-    //GET
-    public List<EmpresaGeradora>getAllEmpresaGeradora() {
+    public List<EmpresaGeradora> getAllEmpresaGeradora() {
         return empresaGeradoraRepository.findAll();
     }
 
-    // GET BY ID
     public EmpresaGeradora getEmpresaGeradoraById(Long id) {
         return empresaGeradoraRepository.findEmpresaGeradoraById(id);       
     }
 
-    // CREATE   
     public EmpresaGeradora salvarEmpresaGeradora(EmpresaGeradora empresaGeradora) {
         return empresaGeradoraRepository.save(empresaGeradora);
     }
 
-    // UPDATE
-    public EmpresaGeradora atualizarEmpresaGeradora(Long id, EmpresaGeradora novaEmpresaGeradora) {
+    public EmpresaGeradora atualizarEmpresaGeradora(Long id, EmpresaGeradora empresaGeradoraAtualizada) {
         EmpresaGeradora empresaGeradora = empresaGeradoraRepository.findEmpresaGeradoraById(id);
 
-     if (empresaGeradora == null) {
+        if (empresaGeradora == null) {
             throw new RuntimeException("Não existe");
-        }
+        } else {
 
-        empresaGeradora.setNome(novaEmpresaGeradora.getNome());
-        empresaGeradora.setEndereco(novaEmpresaGeradora.getEndereco());
-        empresaGeradora.setTelefone(novaEmpresaGeradora.getTelefone());
-        empresaGeradora.setCnpj(novaEmpresaGeradora.getCnpj());
+        empresaGeradora.setNome(empresaGeradoraAtualizada.getNome());
+        empresaGeradora.setCnpj(empresaGeradoraAtualizada.getCnpj());
+        empresaGeradora.setEndereco(empresaGeradoraAtualizada.getEndereco());
+        empresaGeradora.setTelefone(empresaGeradoraAtualizada.getTelefone());
 
         return empresaGeradoraRepository.save(empresaGeradora);
+        
+        }
     };
 
-    // DELETE
-    public void deletarEmpresaGeradora(Integer id) {
+    public void deletarEmpresaGeradora(Long id) {
         empresaGeradoraRepository.deleteById(id);
     }
+
 }
-
-    
-
