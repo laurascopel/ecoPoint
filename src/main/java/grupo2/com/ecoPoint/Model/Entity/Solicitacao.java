@@ -3,6 +3,8 @@ package grupo2.com.ecoPoint.Model.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -24,38 +26,39 @@ public class Solicitacao {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_geradora_id")
+    @JoinColumn(name = "empresa_geradora_id")   /* Relaciona com a empresa geradora, Varias solicitações para uma empresa */
     private EmpresaGeradora empresaGeradora;
 
     @ManyToOne
-    @JoinColumn(name = "empresa_coletora_id")
+    @JoinColumn(name = "empresa_coletora_id")  /* Relaciona com a empresa coletora, varias solicitações para uma empresa */
     private EmpresaColetora empresaColetora;
+    
+    @CreationTimestamp                         /* automaticamente vai registrar a data da criação da solicitação */
+    private LocalDate dataSolicitacao; 
 
-    private LocalDate dataSolicitacao = LocalDate.now();
     private LocalDate dataAgendada;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) /* Vai ser armazenado no banco como ENUM(Variaveis com itens estabelecidos) */
     private StatusSolicitacao status;
 
     @ManyToMany
-    @JoinTable(
-        name = "solicitacao_itens",
-        joinColumns = @JoinColumn(name = "solicitacao_id"),
-        inverseJoinColumns = @JoinColumn(name = "item_id")
+    @JoinTable(                          /* Varios itens para varies solicitações*/
+        name = "solicitacao_itens",     /* Sem a criação desta tabela intermediaria para relacionar empresa com item, nao podemos ter o ManyToMany*/
+        joinColumns = @JoinColumn(name = "solicitacao_id"), 
+        inverseJoinColumns = @JoinColumn(name = "itemResiduo_id")
+        /* Relacionando o item-residuo com a solicitação */
     )
     private List<ItemResiduo> itens;
 
-    @OneToOne(mappedBy = "solicitacao", cascade = CascadeType.ALL)
-    private Certificado certificado;
+    @OneToOne(mappedBy = "solicitacao", cascade = CascadeType.ALL)  /* o mapped significa que o relacionamento é mapeado pelo campo que tem dentro da entidade Certificado */
+    private Certificado certificado;                                /* Caso mexa em uma solicitação o exclua o certificado sera afetado junto, cascade = CascadeType.ALL  */
 
-    public Solicitacao() {}
+    public Solicitacao() {                                          /* Construtor vazio obrigatório para JPA */
 
-    // Getters e Setters
+    } 
+
     public Long getId() {
         return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public EmpresaGeradora getEmpresaGeradora() {

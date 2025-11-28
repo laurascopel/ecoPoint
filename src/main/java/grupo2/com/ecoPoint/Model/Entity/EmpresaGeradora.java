@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+
 @Entity
 public class EmpresaGeradora {
 
@@ -16,7 +17,10 @@ public class EmpresaGeradora {
     private String endereco;
     private String telefone;
 
-    public EmpresaGeradora() {}
+ 
+    public EmpresaGeradora() {     /* Construtor vazio obrigatório para JPA */
+
+    } 
 
     public EmpresaGeradora(String nome, String cnpj, String endereco, String telefone) {
         this.nome = nome;
@@ -56,4 +60,5 @@ public class EmpresaGeradora {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
 }
