@@ -11,14 +11,14 @@ public class ItemResiduo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String nome; // nome do resíduo, ex: "Papel", "Plástico", "Metal"
 
-    // Construtor vazio obrigatório para JPA
-    public ItemResiduo() {}
+ 
+    public ItemResiduo() {  /* Construtor vazio obrigatório para JPA */
 
-    // Construtor com nome
-    public ItemResiduo(String nome) {
+    } 
+
+    public ItemResiduo(String nome) { /* Construtor */
         this.nome = nome;
     }
     

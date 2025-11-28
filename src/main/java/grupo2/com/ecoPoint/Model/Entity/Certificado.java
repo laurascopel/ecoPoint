@@ -6,29 +6,31 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
+
 
 @Entity
 public class Certificado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) /* Definir ID como chave primaria, é um numero sequencial  */ 
     private Long id;
-
-    private String urlDocumento;
     private LocalDate dataEmissao;
-    private String tipo; // CDF, CRT, MTR...
+    private String tipo;                                /* MTR...ETC */
+    @Lob
+    private byte[] documento;                            /* Para anexos grandes lob e byte */
 
-    @OneToOne
-    @JoinColumn(name = "solicitacao_id")
+    @OneToOne                                  /* Pode emitir varios certificados na mesma solicitação*/
+    @JoinColumn(name = "solicitacao_id")         /*foreign key - chave unica de outra entidade(chave estrangeira) está relacionando uma solicitação para varios certificados */
     private Solicitacao solicitacao;
 
-    // Construtor vazio obrigatório para JPA
-    public Certificado() {}
 
-    // Construtor com parâmetros
-    public Certificado(String urlDocumento, LocalDate dataEmissao, String tipo) {
-        this.urlDocumento = urlDocumento;
+    public Certificado() {}                           /* Construtor vazio obrigatório para JPA */
+
+  
+    public Certificado(byte[] documento, LocalDate dataEmissao, String tipo) {             /* Construtor */
+        this.documento = documento;
         this.dataEmissao = dataEmissao;
         this.tipo = tipo;
     }
@@ -38,12 +40,12 @@ public class Certificado {
         return id;
     }
 
-    public String getUrlDocumento() {
-        return urlDocumento;
+    public byte[] getDocumento() {
+        return documento;
     }
 
-    public void setUrlDocumento(String urlDocumento) {
-        this.urlDocumento = urlDocumento;
+    public void setDocumento(byte[] documento) {
+        this.documento = documento;
     }
 
     public LocalDate getDataEmissao() {

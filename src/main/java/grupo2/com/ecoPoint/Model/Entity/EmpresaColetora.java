@@ -27,14 +27,18 @@ public class EmpresaColetora {
     private String descricao;
 
     @ManyToMany
-    @JoinTable(
-        name = "empresa_itens",
-        joinColumns = @JoinColumn(name = "empresa_id"),
-        inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
-    private List<ItemResiduo> itensQueRecebe;
+    @JoinTable(                              /* Varios itensResiduos para varias empresasas) */
+        name = "empresa_coletora_itens",    /* Sem a criação desta tabela intermediaria para relacionar empresa com item, nao podemos ter o ManyToMany*/
+        joinColumns = @JoinColumn(name = "empresa_coletora_id"),
+        inverseJoinColumns = @JoinColumn(name = "item_residuo_id")
+        /* Relacionando o item-residuo com a empresa */
 
-    public EmpresaColetora() {}
+    )
+    private List<ItemResiduo> itensQueRecebe; 
+
+    public EmpresaColetora() {          /* Construtor vazio obrigatório para JPA */
+
+    }  
 
     public EmpresaColetora(String nome, String endereco, LocalTime horarioFuncionamento,
                            String telefone, String descricao, LocalDate data, String cnpj) {
