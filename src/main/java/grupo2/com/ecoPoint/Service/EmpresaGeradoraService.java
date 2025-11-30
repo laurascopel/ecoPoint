@@ -34,10 +34,6 @@ public class EmpresaGeradoraService {
     public EmpresaGeradora atualizarEmpresaGeradora(Long id, EmpresaGeradora empresaGeradoraAtualizada) {
         EmpresaGeradora empresaGeradora = empresaGeradoraRepository.findEmpresaGeradoraById(id);
 
-        if (empresaGeradora == null) {
-            throw new RuntimeException("Não existe");
-        } else {
-
         empresaGeradora.setNome(empresaGeradoraAtualizada.getNome());
         empresaGeradora.setCnpj(empresaGeradoraAtualizada.getCnpj());
         empresaGeradora.setEndereco(empresaGeradoraAtualizada.getEndereco());
@@ -45,11 +41,10 @@ public class EmpresaGeradoraService {
 
         return empresaGeradoraRepository.save(empresaGeradora);
         
-        }
     };
 
     public void deletarEmpresaGeradora(Long id) {
         empresaGeradoraRepository.deleteById(id);
     }
-
 }
+    
