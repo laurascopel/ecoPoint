@@ -1,9 +1,11 @@
 package grupo2.com.ecoPoint.Service;
 
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
+import grupo2.com.ecoPoint.Model.Entity.ItemResiduo;
 import grupo2.com.ecoPoint.Repository.EmpresaColetoraRepository;
 
 @Service
@@ -32,10 +34,6 @@ public class EmpresaColetoraService {
     public EmpresaColetora atualizarEmpresaColetora(Long id, EmpresaColetora empresaColetoraAtualizada) {
         EmpresaColetora empresaColetora = empresaColetoraRepository.findEmpresaColetoraById(id);
 
-        if (empresaColetora == null) {
-            throw new RuntimeException("Não existe");
-        }
-
         empresaColetora.setNome(empresaColetoraAtualizada.getNome());
         empresaColetora.setEndereco(empresaColetoraAtualizada.getEndereco());
         empresaColetora.setCnpj(empresaColetoraAtualizada.getCnpj());
@@ -51,6 +49,19 @@ public class EmpresaColetoraService {
     public void deletarEmpresaColetora(Long id) {
         empresaColetoraRepository.deleteById(id);
     }
+
+    public List<ItemResiduo> getItensByEmpresaColetoraId(Long id) {
+        EmpresaColetora empresaColetora = empresaColetoraRepository.findEmpresaColetoraById(id);
+        return empresaColetora.getItensQueRecebe();
+    }
+    
+    public void atualizarItensColetora(Long empresaColetoraId, List<ItemResiduo> itemResiduo) {
+        EmpresaColetora empresaColetora = empresaColetoraRepository.findEmpresaColetoraById(empresaColetoraId);
+        
+        empresaColetora.setItensQueRecebe(itemResiduo);
+        
+        empresaColetoraRepository.save(empresaColetora);
+}
 }
 
     
