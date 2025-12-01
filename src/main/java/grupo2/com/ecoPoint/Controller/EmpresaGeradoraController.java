@@ -32,7 +32,7 @@ public class EmpresaGeradoraController {
 
     // GET BY ID
     @GetMapping("/{id}")
-    public EmpresaGeradora getEmpresaGeradoraById(@PathVariable Integer id) {
+    public EmpresaGeradora getEmpresaGeradoraById(@PathVariable Long id) {
         return empresaGeradoraService.getEmpresaGeradoraById(id);
     }
 
@@ -44,13 +44,13 @@ public class EmpresaGeradoraController {
 
     // UPDATE
     @PutMapping("/{id}")
-    public EmpresaGeradora atualizEmpresaGeradora(@PathVariable Integer id, @RequestBody EmpresaGeradora empresaGeradora) {
+    public EmpresaGeradora atualizEmpresaGeradora(@PathVariable Long id, @RequestBody EmpresaGeradora empresaGeradora) {
         return empresaGeradoraService.atualizarEmpresaGeradora(id, empresaGeradora);
     }
 
     // DELETE
     @DeleteMapping("/{id}")
-    public void deletarEmpresaGeradora(@PathVariable Integer id) {
+    public void deletarEmpresaGeradora(@PathVariable Long id) {
         empresaGeradoraService.deletarEmpresaGeradora(id);
     }
 }

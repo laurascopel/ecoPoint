@@ -44,13 +44,13 @@ public class EmpresaColetoraController {
 
     // UPDATE
     @PutMapping("/{id}")
-    public EmpresaColetora atualizEmpresaColetora(@PathVariable Integer id, @RequestBody EmpresaColetora empresaColetora) {
+    public EmpresaColetora atualizEmpresaColetora(@PathVariable Long id, @RequestBody EmpresaColetora empresaColetora) {
         return empresaColetoraService.atualizarEmpresaColetora(id, empresaColetora);
     }
 
     // DELETE
     @DeleteMapping("/{id}")
-    public void deletarEmpresaColetora(@PathVariable Integer id) {
+    public void deletarEmpresaColetora(@PathVariable Long id) {
         empresaColetoraService.deletarEmpresaColetora(id);
     }
 }
