@@ -14,7 +14,7 @@ public class EmpresaGeradoraService {
     private final EmpresaGeradoraRepository empresaGeradoraRepository;
 
     
-    public EmpresaGeradoraService(EmpresaGeradoraRepository empresaGeradoraRepository,  Long id) {
+    public EmpresaGeradoraService(EmpresaGeradoraRepository empresaGeradoraRepository) {
         this.empresaGeradoraRepository = empresaGeradoraRepository;
     
     }

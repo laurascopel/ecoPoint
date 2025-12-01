@@ -13,7 +13,7 @@ public class SolicitacaoService {
 
     private final SolicitacaoRepository solicitacaoRepository;
     
-    public SolicitacaoRepository(SolicitacaoRepository solicitacaoRepository,  Long id) {
+    public SolicitacaoService(SolicitacaoRepository solicitacaoRepository) {
         this.solicitacaoRepository = solicitacaoRepository;
     }
 
