@@ -11,6 +11,7 @@ import grupo2.com.ecoPoint.Model.Entity.EmpresaGeradora;
 import grupo2.com.ecoPoint.Model.Entity.ItemResiduo;
 import grupo2.com.ecoPoint.Model.Entity.Solicitacao;
 import grupo2.com.ecoPoint.Model.Entity.StatusSolicitacao;
+import grupo2.com.ecoPoint.Repository.CertificadoRepository;
 import grupo2.com.ecoPoint.Repository.EmpresaColetoraRepository;
 import grupo2.com.ecoPoint.Repository.EmpresaGeradoraRepository;
 import grupo2.com.ecoPoint.Repository.ItemResiduoRepository;
@@ -25,7 +26,7 @@ public class SolicitacaoService {
     private final ItemResiduoRepository itemRepository;
 
     public SolicitacaoService(SolicitacaoRepository solicitacaoRepository, EmpresaGeradoraRepository geradoraRepository, EmpresaColetoraRepository coletoraRepository,
-        ItemResiduoRepository itemRepository, Certificado certificado) 
+        ItemResiduoRepository itemRepository, CertificadoRepository certificadoRepository) 
    
     {
         this.solicitacaoRepository = solicitacaoRepository;
