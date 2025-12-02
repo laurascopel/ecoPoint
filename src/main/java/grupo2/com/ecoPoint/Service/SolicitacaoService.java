@@ -24,8 +24,9 @@ public class SolicitacaoService {
     private final EmpresaColetoraRepository coletoraRepository;
     private final ItemResiduoRepository itemRepository;
 
+
     public SolicitacaoService(SolicitacaoRepository solicitacaoRepository, EmpresaGeradoraRepository geradoraRepository, EmpresaColetoraRepository coletoraRepository,
-        ItemResiduoRepository itemRepository, Certificado certificado) 
+        ItemResiduoRepository itemRepository) 
    
     {
         this.solicitacaoRepository = solicitacaoRepository;
@@ -103,6 +104,27 @@ public class SolicitacaoService {
         solicitacao.setStatus(StatusSolicitacao.FINALIZADA);
 
         return solicitacaoRepository.save(solicitacao);
+    }
+
+    public List<Solicitacao> getAllSolicitacao() {
+        return solicitacaoRepository.findAll();
+    }
+
+    public Solicitacao getSolicitacaoById(Long id) {
+        return solicitacaoRepository.findSolicitacaoById(id);       
+    }
+
+    public Solicitacao atualizarSolicitacao(Long id, Solicitacao solicitacaoAtualizada) {
+        Solicitacao solicitacao = solicitacaoRepository.findSolicitacaoById(id);
+
+        solicitacao.setEmpresaGeradora(solicitacaoAtualizada.getEmpresaGeradora());
+        solicitacao.setEmpresaColetora(solicitacaoAtualizada.getEmpresaColetora());
+        solicitacao.setDataAgendada(solicitacaoAtualizada.getDataAgendada());
+        solicitacao.setItens(solicitacaoAtualizada.getItens());
+        solicitacao.setStatus(solicitacaoAtualizada.getStatus());
+
+        return solicitacaoRepository.save(solicitacao);
+        
     }
 
 }
