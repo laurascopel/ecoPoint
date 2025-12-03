@@ -37,7 +37,6 @@ public class ItemResiduoController {
     public ItemResiduo getItemResiduoById(@PathVariable Long id) {
         return itemResiduoService.getItemResiduoById(id);
     
-    
     }
 
     @PostMapping

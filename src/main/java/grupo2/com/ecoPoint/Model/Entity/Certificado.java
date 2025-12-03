@@ -21,7 +21,7 @@ public class Certificado {
     @Lob
     private byte[] documento;                            /* Para anexos grandes lob e byte */
 
-    @OneToOne                                  /* Pode emitir varios certificados na mesma solicitação*/
+    @OneToOne                                  /* Relação de um para um entre certificado e solicitação */
     @JoinColumn(name = "solicitacao_id")         /*foreign key - chave unica de outra entidade(chave estrangeira) está relacionando uma solicitação para varios certificados */
     private Solicitacao solicitacao;
 
