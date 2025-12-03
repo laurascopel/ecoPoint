@@ -36,23 +36,6 @@ public class CertificadoController {
         return certificadoService.getCertificadoById(id);
     }
 
- // CREATE
-    @PostMapping
-    public Certificado criarCertificado(@RequestBody Certificado certificado) {
-        return certificadoService.criarCertificado(certificado);
-    }
-
-    // UPDATE
-    @PutMapping("/{id}")
-    public Certificado atualizarCertificado(@PathVariable Long id, @RequestBody Certificado certificado) {
-        return certificadoService.atualizarCertificado(id, certificado);
-    }
-
-    // DELETE
-    @DeleteMapping("/{id}")
-    public void deletarCertificado(@PathVariable Long id) {
-        certificadoService.deletarCertificado(id);
-    }
 }
 
 
