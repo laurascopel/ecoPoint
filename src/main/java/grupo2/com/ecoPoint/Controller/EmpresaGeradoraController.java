@@ -48,7 +48,6 @@ public class EmpresaGeradoraController {
 
  @PostMapping("/cadastrar")
     public ResponseEntity<?> cadastrar(@RequestBody EmpresaGeradora empresaGeradora) {
-    empresaGeradora.setSenha(passwordEncoder.encode(empresaGeradora.getSenha()));
     EmpresaGeradora salva = empresaGeradoraService.salvarEmpresaGeradora(empresaGeradora);
     return ResponseEntity.ok(salva);
 }
