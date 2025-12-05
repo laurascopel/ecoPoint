@@ -18,6 +18,8 @@ public class EmpresaColetora {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String email;
+    private String senha;
     private String nome;
     private String endereco;
     private String cnpj;
@@ -41,7 +43,9 @@ public class EmpresaColetora {
     }  
 
     public EmpresaColetora(String nome, String endereco, LocalTime horarioFuncionamento,
-                           String telefone, String descricao, LocalDate data, String cnpj) {
+                           String telefone, String descricao, LocalDate data, String cnpj, String email, String senha){
+        this.email = email;
+        this.senha = senha;
         this.nome = nome;
         this.endereco = endereco;
         this.horarioFuncionamento = horarioFuncionamento;
@@ -53,6 +57,20 @@ public class EmpresaColetora {
 
     public Long getId() {
         return id;
+    }
+
+     public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+      public String getSenha() {
+        return senha;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getNome() {

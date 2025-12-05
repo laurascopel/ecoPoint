@@ -12,6 +12,8 @@ public class EmpresaGeradora {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String email;
+    private String senha;
     private String nome;
     private String cnpj;
     private String endereco;
@@ -22,7 +24,9 @@ public class EmpresaGeradora {
 
     } 
 
-    public EmpresaGeradora(String nome, String cnpj, String endereco, String telefone) {
+    public EmpresaGeradora(String nome, String cnpj, String endereco, String telefone, String email, String senha) {
+        this.email = email;
+        this.senha = senha;   
         this.nome = nome;
         this.cnpj = cnpj;
         this.endereco = endereco;
@@ -31,6 +35,19 @@ public class EmpresaGeradora {
 
     public Long getId() {
         return id;
+    }
+      public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+      public String getSenha() {
+        return senha;
+    }
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getNome() {

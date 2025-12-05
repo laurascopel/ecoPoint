@@ -1,10 +1,8 @@
 package grupo2.com.ecoPoint.Service;
-
-
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import grupo2.com.ecoPoint.Model.Entity.EmpresaGeradora;
 import grupo2.com.ecoPoint.Repository.EmpresaGeradoraRepository;
 
@@ -12,6 +10,31 @@ import grupo2.com.ecoPoint.Repository.EmpresaGeradoraRepository;
 public class EmpresaGeradoraService {
 
     private final EmpresaGeradoraRepository empresaGeradoraRepository;
+
+    @Autowired
+    private EmpresaGeradoraRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public EmpresaGeradora login(String email, String senhaDigitada) {
+    EmpresaGeradora empresa = repository.findByEmail(email) /* procurar a empresa geradora pelo email*/
+    .orElseThrow(() -> new RuntimeException("Email não encontrado!")); /* abre uma exceção se nao encontrar um email*/
+
+    boolean senhaCorreta = passwordEncoder.matches(senhaDigitada, empresa.getSenha()); /* vai ver se a senha é igual a senha q ta no banco*/
+
+    if (!senhaCorreta) {
+        throw new RuntimeException("Senha incorreta!"); /* Se não for a senha vai passar a mensagem*/
+    }
+
+    return empresa; /* login ok*/
+    }
+
+    public EmpresaGeradora salvarEmpresaGeradora(EmpresaGeradora empresa) {
+    String senhaCriptografada = passwordEncoder.encode(empresa.getSenha());  /* Criptografa antes de salvar*/
+    empresa.setSenha(senhaCriptografada);
+        return repository.save(empresa); /*substitui a senha original por criptografada e salva TODA EMPRESA no banco*/
+    }
 
     
     public EmpresaGeradoraService(EmpresaGeradoraRepository empresaGeradoraRepository) {
@@ -25,10 +48,6 @@ public class EmpresaGeradoraService {
 
     public EmpresaGeradora getEmpresaGeradoraById(Long id) {
         return empresaGeradoraRepository.findEmpresaGeradoraById(id);       
-    }
-
-    public EmpresaGeradora salvarEmpresaGeradora(EmpresaGeradora empresaGeradora) {
-        return empresaGeradoraRepository.save(empresaGeradora);
     }
 
     public EmpresaGeradora atualizarEmpresaGeradora(Long id, EmpresaGeradora empresaGeradoraAtualizada) {
