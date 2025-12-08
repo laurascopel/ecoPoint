@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 import grupo2.com.ecoPoint.Model.Entity.Solicitacao;
 import grupo2.com.ecoPoint.Service.SolicitacaoService;
 
@@ -50,7 +51,7 @@ public class SolicitacaoController {
     );
 }
 
-     @PutMapping("/{id}")  
+    @PutMapping("/{id}")  
     public Solicitacao atualizarSolicitacao(@PathVariable Long id, @RequestBody Solicitacao solicitacao) {
         return solicitacaoService.atualizarSolicitacao(id, solicitacao);
 
@@ -80,9 +81,14 @@ public class SolicitacaoController {
         return solicitacaoService.recusarSolicitacao(id);
     }
 
-        @PutMapping("/{id}/coletar")
+    @PutMapping("/{id}/coletar")
     public Solicitacao coletar(@PathVariable Long id) {
         return solicitacaoService.coletarSolicitacao(id);
     }
+
+    @GetMapping("/coletoras-por-itens")
+    public List<EmpresaColetora> buscarColetorasPorItens(@RequestParam List<Long> itens) {
+    return solicitacaoService.buscarColetorasPorItens(itens);
+}
 
 }
