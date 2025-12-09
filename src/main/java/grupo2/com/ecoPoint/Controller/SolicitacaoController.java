@@ -2,6 +2,8 @@ package grupo2.com.ecoPoint.Controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +20,7 @@ import grupo2.com.ecoPoint.Service.SolicitacaoService;
 
 @RestController
 @RequestMapping("/solicitacao")
+@CrossOrigin(origins = "*")
 
 public class SolicitacaoController {
     public final SolicitacaoService solicitacaoService;

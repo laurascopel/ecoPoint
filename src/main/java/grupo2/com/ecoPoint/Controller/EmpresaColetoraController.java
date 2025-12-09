@@ -1,8 +1,11 @@
 package grupo2.com.ecoPoint.Controller;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,13 +14,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 import grupo2.com.ecoPoint.Repository.EmpresaColetoraRepository;
 import grupo2.com.ecoPoint.Service.EmpresaColetoraService;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/empresasColetoras")
+@CrossOrigin(origins = "*")
 public class EmpresaColetoraController {
 
     private final EmpresaColetoraService empresaColetoraService;
