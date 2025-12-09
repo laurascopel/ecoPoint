@@ -1,16 +1,16 @@
 package grupo2.com.ecoPoint.Service;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import grupo2.com.ecoPoint.Model.Entity.EmpresaGeradora;
 import grupo2.com.ecoPoint.Repository.EmpresaGeradoraRepository;
 
 @Service
 public class EmpresaGeradoraService {
-
-    private final EmpresaGeradoraRepository empresaGeradoraRepository;
-
+    
     @Autowired
     private EmpresaGeradoraRepository repository;
 
@@ -36,34 +36,28 @@ public class EmpresaGeradoraService {
         return repository.save(empresa); /*substitui a senha original por criptografada e salva TODA EMPRESA no banco*/
     }
 
-    
-    public EmpresaGeradoraService(EmpresaGeradoraRepository empresaGeradoraRepository) {
-        this.empresaGeradoraRepository = empresaGeradoraRepository;
-    
-    }
-
     public List<EmpresaGeradora> getAllEmpresaGeradora() {
-        return empresaGeradoraRepository.findAll();
+        return repository.findAll();
     }
 
     public EmpresaGeradora getEmpresaGeradoraById(Long id) {
-        return empresaGeradoraRepository.findEmpresaGeradoraById(id);       
+        return repository.findEmpresaGeradoraById(id);       
     }
 
     public EmpresaGeradora atualizarEmpresaGeradora(Long id, EmpresaGeradora empresaGeradoraAtualizada) {
-        EmpresaGeradora empresaGeradora = empresaGeradoraRepository.findEmpresaGeradoraById(id);
+        EmpresaGeradora empresaGeradora = repository.findEmpresaGeradoraById(id);
 
         empresaGeradora.setNome(empresaGeradoraAtualizada.getNome());
         empresaGeradora.setCnpj(empresaGeradoraAtualizada.getCnpj());
         empresaGeradora.setEndereco(empresaGeradoraAtualizada.getEndereco());
         empresaGeradora.setTelefone(empresaGeradoraAtualizada.getTelefone());
 
-        return empresaGeradoraRepository.save(empresaGeradora);
+        return repository.save(empresaGeradora);
         
     };
 
     public void deletarEmpresaGeradora(Long id) {
-        empresaGeradoraRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }
     

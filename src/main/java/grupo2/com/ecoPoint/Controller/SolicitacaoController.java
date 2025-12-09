@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 import grupo2.com.ecoPoint.Model.Entity.Solicitacao;
 import grupo2.com.ecoPoint.Service.SolicitacaoService;
+import grupo2.com.ecoPoint.dto.SolicitacaoDTO;
 
 @RestController
 @RequestMapping("/solicitacao")
@@ -40,18 +41,13 @@ public class SolicitacaoController {
     }
 
     @PostMapping
-    public Solicitacao criarSolicitacao(
-    @RequestParam Long geradoraId,
-    @RequestParam Long coletoraId,
-    @RequestParam String dataAgendada,
-    @RequestParam List<Long> itensIds
-){
-    return solicitacaoService.criarSolicitacao(
-        geradoraId,
-        coletoraId,
-        LocalDate.parse(dataAgendada),
-        itensIds
-    );
+    public Solicitacao criarSolicitacao(@RequestBody SolicitacaoDTO dto) {
+        return solicitacaoService.criarSolicitacao(
+            dto.getGeradoraId(),
+            dto.getColetoraId(),
+            LocalDate.parse(dto.getDataAgendada()),
+            dto.getItensIds()
+        );
 }
 
     @PutMapping("/{id}")  

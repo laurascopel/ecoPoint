@@ -1,6 +1,7 @@
- DELETE FROM empresa_coletora;
- DELETE FROM empresa_geradora; 
- DELETE FROM item_residuo; 
+DELETE FROM empresa_coletora;
+DELETE FROM empresa_geradora; 
+DELETE FROM item_residuo; 
+DELETE FROM empresa_coletora_itens;
 
 INSERT INTO item_residuo (nome) VALUES ('Plástico');
 INSERT INTO item_residuo (nome) VALUES ('Vidro');
@@ -12,7 +13,7 @@ INSERT INTO item_residuo (nome) VALUES ('Madeira');
 INSERT INTO item_residuo (nome) VALUES ('Papel');
 INSERT INTO item_residuo (nome) VALUES ('Papelão');
 INSERT INTO item_residuo (nome) VALUES ('Metal');
-INSERT INTO item_residuo (nome) VALUES ('óleo\Lubrificante');
+INSERT INTO item_residuo (nome) VALUES ('Óleo/Lubrificante');
 INSERT INTO item_residuo (nome) VALUES ('Pneu');
 INSERT INTO item_residuo (nome) VALUES ('Hospitalar');
 INSERT INTO item_residuo (nome) VALUES ('Tinta');
@@ -27,7 +28,7 @@ VALUES (
     'Laika Construções',
     '00.131.222/0021-43',
     'Rua das Guria, 323 - Centro',
-    '(51) 94002-8922',
+    '(51) 94002-8922'
 );
 
 INSERT INTO empresa_coletora (nome, endereco, cnpj, horario_funcionamento, data, telefone, descricao) 
@@ -40,6 +41,7 @@ VALUES (
     '(51) 99876-5432',
     'Especializada na coleta de resíduos recicláveis para Porto Alegre.'
 );
+
 INSERT INTO empresa_coletora (nome, endereco, cnpj, horario_funcionamento, data, telefone, descricao) 
 VALUES (
     'Coleta e Cia Ltd-Me',
@@ -50,3 +52,12 @@ VALUES (
     '(51) 99845-5452',
     'Descarte consciente.'
 );
+
+INSERT INTO empresa_coletora_itens (empresa_coletora_id, item_residuo_id) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4);

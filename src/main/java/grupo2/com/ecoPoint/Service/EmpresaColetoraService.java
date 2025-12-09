@@ -1,8 +1,10 @@
 package grupo2.com.ecoPoint.Service;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 import grupo2.com.ecoPoint.Model.Entity.ItemResiduo;
 import grupo2.com.ecoPoint.Repository.EmpresaColetoraRepository;
@@ -35,24 +37,16 @@ private PasswordEncoder passwordEncoder; /* Do metodo criptografar */
         return repository.save(empresa); /*substitui a senha original por criptografada e salva TODA EMPRESA no banco*/
     }
 
-    
-    private final EmpresaColetoraRepository empresaColetoraRepository;
-    
-    public EmpresaColetoraService(EmpresaColetoraRepository empresaColetoraRepository) {
-        this.empresaColetoraRepository = empresaColetoraRepository;
-    
-    }
-
     public List<EmpresaColetora> getAllEmpresaColetora() {
-        return empresaColetoraRepository.findAll();
+        return repository.findAll();
     }
 
     public EmpresaColetora getEmpresaColetoraById(Long id) {
-        return empresaColetoraRepository.findEmpresaColetoraById(id);       
+        return repository.findEmpresaColetoraById(id);       
     }
 
     public EmpresaColetora atualizarEmpresaColetora(Long id, EmpresaColetora empresaColetoraAtualizada) {
-        EmpresaColetora empresaColetora = empresaColetoraRepository.findEmpresaColetoraById(id);
+        EmpresaColetora empresaColetora = repository.findEmpresaColetoraById(id);
 
         empresaColetora.setNome(empresaColetoraAtualizada.getNome());
         empresaColetora.setEndereco(empresaColetoraAtualizada.getEndereco());
@@ -62,25 +56,25 @@ private PasswordEncoder passwordEncoder; /* Do metodo criptografar */
         empresaColetora.setTelefone(empresaColetoraAtualizada.getTelefone());
         empresaColetora.setDescricao(empresaColetoraAtualizada.getDescricao());
 
-        return empresaColetoraRepository.save(empresaColetora);
+        return repository.save(empresaColetora);
 
     };
 
     public void deletarEmpresaColetora(Long id) {
-        empresaColetoraRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
     public List<ItemResiduo> getItensByEmpresaColetoraId(Long id) {
-        EmpresaColetora empresaColetora = empresaColetoraRepository.findEmpresaColetoraById(id);
+        EmpresaColetora empresaColetora = repository.findEmpresaColetoraById(id);
         return empresaColetora.getItensQueRecebe();
     }
     
     public void atualizarItensColetora(Long empresaColetoraId, List<ItemResiduo> itemResiduo) {
-        EmpresaColetora empresaColetora = empresaColetoraRepository.findEmpresaColetoraById(empresaColetoraId);
+        EmpresaColetora empresaColetora = repository.findEmpresaColetoraById(empresaColetoraId);
         
         empresaColetora.setItensQueRecebe(itemResiduo);
         
-        empresaColetoraRepository.save(empresaColetora);
+        repository.save(empresaColetora);
 }
 }
 
