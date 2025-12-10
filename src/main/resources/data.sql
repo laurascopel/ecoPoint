@@ -2,6 +2,8 @@ DELETE FROM empresa_coletora;
 DELETE FROM empresa_geradora; 
 DELETE FROM item_residuo; 
 DELETE FROM empresa_coletora_itens;
+DELETE FROM solicitacao_itens;
+DELETE FROM solicitacao;
 
 INSERT INTO item_residuo (nome) VALUES ('Plástico');
 INSERT INTO item_residuo (nome) VALUES ('Vidro');
@@ -23,16 +25,20 @@ INSERT INTO item_residuo (nome) VALUES ('Filtro de óleo');
 INSERT INTO item_residuo (nome) VALUES ('Telha');
 
 
-INSERT INTO empresa_geradora (nome, cpnj, endereco, telefone) 
+INSERT INTO empresa_geradora (email, senha, nome, cnpj, endereco, telefone) 
 VALUES (
+    'teste@geradora.com',
+    '$2b$12$htCpNpRgmxBsHzEWIdeoseeBNm0y7AxsPQwiSymKHOeh.pN8aQoX6',
     'Laika Construções',
     '00.131.222/0021-43',
     'Rua das Guria, 323 - Centro',
     '(51) 94002-8922'
 );
 
-INSERT INTO empresa_coletora (nome, endereco, cnpj, horario_funcionamento, data, telefone, descricao) 
+INSERT INTO empresa_coletora (email, senha, nome, endereco, cnpj, horario_funcionamento, data, telefone, descricao) 
 VALUES (
+    'teste@coletora.com',
+    '$2b$12$htCpNpRgmxBsHzEWIdeoseeBNm0y7AxsPQwiSymKHOeh.pN8aQoX6',
     'EcoColeta Rápida Ltda',
     'Rua das Palmeiras, 123 - Centro',
     '00.111.222/0001-33',
@@ -61,3 +67,21 @@ INSERT INTO empresa_coletora_itens (empresa_coletora_id, item_residuo_id) VALUES
 (2, 2),
 (2, 3),
 (2, 4);
+
+INSERT INTO solicitacao (empresa_geradora_id, empresa_coletora_id, data_agendada, status)
+VALUES (1, 1, '2025-12-12', 'PENDENTE');
+SET @lastId = LAST_INSERT_ID();
+INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 1);
+INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 2);
+
+INSERT INTO solicitacao (empresa_geradora_id, empresa_coletora_id, data_agendada, status)
+VALUES (1, 1, '2025-12-12', 'ACEITA');
+SET @lastId = LAST_INSERT_ID();
+INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 1);
+INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 2);
+
+INSERT INTO solicitacao (empresa_geradora_id, empresa_coletora_id, data_agendada, status)
+VALUES (1, 1, '2025-12-12', 'COLETADA');
+SET @lastId = LAST_INSERT_ID();
+INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 1);
+INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 2);

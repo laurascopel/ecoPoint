@@ -1,7 +1,9 @@
 package grupo2.com.ecoPoint.Service;
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import grupo2.com.ecoPoint.Model.Entity.Certificado;
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 import grupo2.com.ecoPoint.Model.Entity.EmpresaGeradora;
@@ -58,6 +60,14 @@ public class SolicitacaoService {
 
     return solicitacaoRepository.save(solicitacao);
  }
+
+    public List<Solicitacao> getSolicitacoesColetora(Long coletoraId) {
+        return solicitacaoRepository.findAllByEmpresaColetoraId(coletoraId);
+    }
+
+    public List<Solicitacao> getSolicitacoesGeradora(Long geradoraId) {
+        return solicitacaoRepository.findAllByEmpresaGeradoraId(geradoraId);
+    }
 
     public Solicitacao aceitarSolicitacao(Long id) {
         Solicitacao solicitacao = solicitacaoRepository.findSolicitacaoById(id);

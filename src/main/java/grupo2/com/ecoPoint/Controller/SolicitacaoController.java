@@ -40,6 +40,16 @@ public class SolicitacaoController {
         return solicitacaoService.getSolicitacaoById(id);
     }
 
+    @GetMapping("/minha/{coletoraId}")
+    public List<Solicitacao> getSolicitacoesColetora(@PathVariable Long coletoraId) {
+        return solicitacaoService.getSolicitacoesColetora(coletoraId);   
+    }
+
+    @GetMapping("/minhas/{geradoraId}")
+    public List<Solicitacao> getSolicitacoesGeradora(@PathVariable Long geradoraId) {
+        return solicitacaoService.getSolicitacoesGeradora(geradoraId);   
+    }
+
     @PostMapping
     public Solicitacao criarSolicitacao(@RequestBody SolicitacaoDTO dto) {
         return solicitacaoService.criarSolicitacao(
@@ -85,8 +95,8 @@ public class SolicitacaoController {
         return solicitacaoService.coletarSolicitacao(id);
     }
 
-    @GetMapping("/coletoras-por-itens")
-    public List<EmpresaColetora> buscarColetorasPorItens(@RequestParam List<Long> itens) {
+    @PostMapping("/coletoras-por-itens")
+    public List<EmpresaColetora> buscarColetorasPorItens(@RequestBody List<Long> itens) {
     return solicitacaoService.buscarColetorasPorItens(itens);
 }
 
