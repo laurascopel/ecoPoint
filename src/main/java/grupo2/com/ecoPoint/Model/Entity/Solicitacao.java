@@ -17,9 +17,16 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Column;
+
 
 @Entity
 public class Solicitacao {
+
+    @Lob
+    @Column(name = "arquivo", columnDefinition = "LONGBLOB")
+    private byte[] arquivo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -113,4 +120,12 @@ public class Solicitacao {
     public void setCertificado(Certificado certificado) {
         this.certificado = certificado;
     }
+    public byte[] getArquivo() {
+    return arquivo;
+}
+
+    public void setArquivo(byte[] arquivo) {
+    this.arquivo = arquivo;
+}
+
 }

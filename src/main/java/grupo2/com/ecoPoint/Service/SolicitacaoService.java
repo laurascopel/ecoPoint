@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import grupo2.com.ecoPoint.Model.Entity.Certificado;
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 import grupo2.com.ecoPoint.Model.Entity.EmpresaGeradora;
@@ -14,6 +14,8 @@ import grupo2.com.ecoPoint.Repository.EmpresaColetoraRepository;
 import grupo2.com.ecoPoint.Repository.EmpresaGeradoraRepository;
 import grupo2.com.ecoPoint.Repository.ItemResiduoRepository;
 import grupo2.com.ecoPoint.Repository.SolicitacaoRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class SolicitacaoService {
@@ -96,22 +98,33 @@ public class SolicitacaoService {
         return solicitacaoRepository.save(solicitacao);
     }
 
-    public Solicitacao adicionarCertificado(Long solicitacaoId, byte[] arquivo, String tipo) {
+    @Transactional
+public Solicitacao adicionarCertificado(Long solicitacaoId, byte[] arquivo, String tipo) {
 
-        Solicitacao solicitacao = solicitacaoRepository.findSolicitacaoById(solicitacaoId);
-        Certificado certificado = new Certificado();
-
-        certificado.setDocumento(arquivo);
-        certificado.setTipo(tipo);
-        certificado.setDataEmissao(LocalDate.now());
-        certificado.setSolicitacao(solicitacao);
-
-        solicitacao.setCertificado(certificado);
-
-        solicitacao.setStatus(StatusSolicitacao.FINALIZADA);
-
-        return solicitacaoRepository.save(solicitacao);
+    Solicitacao solicitacao = solicitacaoRepository.findSolicitacaoById(solicitacaoId);
+    if (solicitacao == null) {
+        throw new EntityNotFoundException("Solicitacao não encontrada: " + solicitacaoId);
     }
+
+    // salva o arquivo no atributo da própria Solicitacao
+    solicitacao.setArquivo(arquivo);
+
+    // cria o certificado (se ainda quiser manter cópia nele)
+    Certificado certificado = new Certificado();
+    certificado.setDocumento(arquivo); // opcional — remove se não quiser duplicar
+    certificado.setTipo(tipo);
+    certificado.setDataEmissao(LocalDate.now());
+    certificado.setSolicitacao(solicitacao);
+
+    // vincula o certificado à solicitação
+    solicitacao.setCertificado(certificado);
+
+    // atualiza status
+    solicitacao.setStatus(StatusSolicitacao.FINALIZADA);
+
+    // salva a solicitação (cascade deve persistir o Certificado se configurado)
+    return solicitacaoRepository.save(solicitacao);
+}
 
     public List<Solicitacao> getAllSolicitacao() {
         return solicitacaoRepository.findAll();

@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.http.ResponseEntity;
 import grupo2.com.ecoPoint.Model.Entity.EmpresaColetora;
 import grupo2.com.ecoPoint.Model.Entity.Solicitacao;
 import grupo2.com.ecoPoint.Service.SolicitacaoService;
 import grupo2.com.ecoPoint.dto.SolicitacaoDTO;
+import org.springframework.http.MediaType;
+
+
 
 @RestController
 @RequestMapping("/solicitacao")
@@ -66,19 +69,21 @@ public class SolicitacaoController {
 
  }
 
-    @PostMapping("/{id}/certificado")
-    public Solicitacao enviarCertificado(
+  @PostMapping(value = "/{id}/certificado", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Solicitacao> enviarCertificado(
         @PathVariable Long id,
         @RequestParam("arquivo") MultipartFile arquivo,
         @RequestParam("tipo") String tipo
     ) throws IOException {
 
-        return solicitacaoService.adicionarCertificado(
-            id,
-            arquivo.getBytes(),
-            tipo
-        );
-    }
+     Solicitacao atualizado = solicitacaoService.adicionarCertificado(
+        id,
+        arquivo.getBytes(),
+        tipo
+     );
+
+    return ResponseEntity.ok(atualizado);
+}
 
     @PutMapping("/{id}/aceitar")
     public Solicitacao aceitar(@PathVariable Long id) {
