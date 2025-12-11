@@ -51,11 +51,11 @@ public class Solicitacao {
     @Enumerated(EnumType.STRING) /* Vai ser armazenado no banco como ENUM(Variaveis com itens estabelecidos) */
     private StatusSolicitacao status;
 
-    @ManyToMany
+    @ManyToMany 
     @JoinTable(                          /* Varios itens para varies solicitações*/
         name = "solicitacao_itens",     /* Sem a criação desta tabela intermediaria para relacionar empresa com item, nao podemos ter o ManyToMany*/
         joinColumns = @JoinColumn(name = "solicitacao_id"), 
-        inverseJoinColumns = @JoinColumn(name = "itemResiduo_id")
+        inverseJoinColumns = @JoinColumn(name = "item_residuo_id")
         /* Relacionando o item-residuo com a solicitação */
     )
     private List<ItemResiduo> itens;
