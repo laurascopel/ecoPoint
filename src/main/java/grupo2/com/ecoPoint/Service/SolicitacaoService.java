@@ -150,5 +150,4 @@ public Solicitacao adicionarCertificado(Long solicitacaoId, byte[] arquivo, Stri
     public void deletarSolicitacao(Long id) {
         solicitacaoRepository.deleteById(id);
     }
-
 }

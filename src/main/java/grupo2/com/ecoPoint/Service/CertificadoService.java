@@ -1,6 +1,8 @@
 package grupo2.com.ecoPoint.Service;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
+
 import grupo2.com.ecoPoint.Model.Entity.Certificado;
 import grupo2.com.ecoPoint.Repository.CertificadoRepository;
 
@@ -42,4 +44,7 @@ public class CertificadoService {
         return certificadoRepository.findAll();
     }
 
+    public byte[] baixarCertificado(Long id) {
+    return certificadoRepository.buscarArquivo(id);
+}
 }

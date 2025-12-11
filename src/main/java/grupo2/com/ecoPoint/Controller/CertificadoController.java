@@ -2,6 +2,10 @@ package grupo2.com.ecoPoint.Controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +37,19 @@ public class CertificadoController {
     public Certificado getCertificadoById(@PathVariable Long id) {
         return certificadoService.getCertificadoById(id);
     }
+
+    @GetMapping("/{solicitacaoId}/download")
+    public ResponseEntity<byte[]> downloadCertificado(@PathVariable Long solicitacaoId) {
+
+        byte[] arquivo = certificadoService.baixarCertificado(solicitacaoId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "certificado.pdf");
+
+        return new ResponseEntity<>(arquivo, headers, HttpStatus.OK);
+    }
+    
 
 }
 
