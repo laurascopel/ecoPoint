@@ -71,7 +71,7 @@ public class SolicitacaoController {
 
  }
 
-  @PostMapping(value = "/{id}/certificado", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/{id}/certificado", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Solicitacao> enviarCertificado(
         @PathVariable Long id,
         @RequestParam("arquivo") MultipartFile arquivo,
