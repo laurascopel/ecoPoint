@@ -71,17 +71,17 @@ INSERT INTO empresa_coletora_itens (empresa_coletora_id, item_residuo_id) VALUES
 INSERT INTO solicitacao (empresa_geradora_id, empresa_coletora_id, data_agendada, status)
 VALUES (1, 1, '2025-12-12', 'PENDENTE');
 SET @lastId = LAST_INSERT_ID();
-INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 1);
-INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 2);
+INSERT INTO solicitacao_itens (solicitacao_id, item_residuo_id) VALUES (@lastId, 1);
+INSERT INTO solicitacao_itens (solicitacao_id, item_residuo_id) VALUES (@lastId, 2);
 
 INSERT INTO solicitacao (empresa_geradora_id, empresa_coletora_id, data_agendada, status)
 VALUES (1, 1, '2025-12-12', 'ACEITA');
 SET @lastId = LAST_INSERT_ID();
-INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 1);
-INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 2);
+INSERT INTO solicitacao_itens (solicitacao_id, item_residuo_id) VALUES (@lastId, 1);
+INSERT INTO solicitacao_itens (solicitacao_id, item_residuo_id) VALUES (@lastId, 2);
+INSERT INTO solicitacao_itens (solicitacao_id, item_residuo_id) VALUES (@lastId, 3);
 
 INSERT INTO solicitacao (empresa_geradora_id, empresa_coletora_id, data_agendada, status)
 VALUES (1, 1, '2025-12-12', 'COLETADA');
 SET @lastId = LAST_INSERT_ID();
-INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 1);
-INSERT INTO solicitacao_itens (solicitacao_id, itemResiduo_id) VALUES (@lastId, 2);
+INSERT INTO solicitacao_itens (solicitacao_id, item_residuo_id) VALUES (@lastId, 1);
