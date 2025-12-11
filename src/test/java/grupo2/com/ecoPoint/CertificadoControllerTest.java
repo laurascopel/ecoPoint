@@ -29,7 +29,7 @@ public class CertificadoControllerTest {
     CertificadoService certificadoService;
 
     @Test
-    void getAllCertificados() throws Exception {
+    void deveEncontrarTodosOsCertificados() throws Exception {
         Certificado c1 = new Certificado();
         c1.setId(1L);
         c1.setTipo("PDF");
@@ -48,7 +48,7 @@ public class CertificadoControllerTest {
     }
 
     @Test
-    void getCertificadoById() throws Exception {
+    void deveEncontrarTodosOsCertificadosPeloId() throws Exception {
         Certificado c = new Certificado();
         c.setId(1L);
         c.setTipo("PDF");

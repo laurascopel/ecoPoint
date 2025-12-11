@@ -48,7 +48,7 @@ public class EmpresaGeradoraControllerTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    void retornarId() throws Exception {
+    void deveRetornarEmpresaGeradoraPorId() throws Exception {
         EmpresaGeradora empresa = new EmpresaGeradora();
         empresa.setId(1L);
         empresa.setNome("EcoPoint");
@@ -122,7 +122,7 @@ public class EmpresaGeradoraControllerTest {
 
 
     @Test
-    void loginBemSucedido() throws Exception {
+    void loginBemSucedidoQuandoSenhaEemailEstiveremCorretos() throws Exception {
         String jsonLogin = """
             {
                 "email": "ecopoint@email.com",
@@ -150,7 +150,7 @@ public class EmpresaGeradoraControllerTest {
     }
 
     @Test
-    void loginFalhaSenhaIncorreta() throws Exception {
+    void falhaNologinAoColocarSenhaIncorreta() throws Exception {
         String jsonLogin = """
             {
                 "email": "ecopoint@email.com",
@@ -177,7 +177,7 @@ public class EmpresaGeradoraControllerTest {
     }
 
     @Test
-    void loginFalhaEmailNaoEncontrado() throws Exception {
+    void falhaNoLoginAoColocarEmailIncorreto() throws Exception {
         String jsonLogin = """
             {
                 "email": "naoexisto@email.com",
@@ -201,7 +201,7 @@ public class EmpresaGeradoraControllerTest {
     }
 
     @Test
-    void deletarEmpresaGeradora() throws Exception {
+    void deveDeletarEmpresaGeradora() throws Exception {
         Mockito.doNothing().when(empresaGeradoraService).deletarEmpresaGeradora(1L);
 
         mockMvc.perform(delete("/EmpresaGeradora/1"))

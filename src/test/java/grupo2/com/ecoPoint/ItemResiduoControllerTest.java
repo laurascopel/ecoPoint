@@ -32,7 +32,7 @@ class ItemResiduoControllerTest {
 
   
     @Test
-    void getItemResiduoById() throws Exception {
+    void deveRetornarItemResiduoPeloId() throws Exception {
         ItemResiduo item = new ItemResiduo();
         item.setId(1L);
         item.setNome("Plástico");
@@ -46,7 +46,7 @@ class ItemResiduoControllerTest {
 
   
     @Test
-    void atualizarItemResiduo() throws Exception {
+    void deveAtualizarItemResiduo() throws Exception {
         String json = """
             {
                 "nome": "Vidro"
@@ -70,7 +70,7 @@ class ItemResiduoControllerTest {
 
  
     @Test
-    void deletarItemResiduo() throws Exception {
+    void deveDeletarItemResiduo() throws Exception {
         doNothing().when(itemResiduoService).deletarItemResiduo(1L);
 
         mockMvc.perform(delete("/itemresiduo/1"))

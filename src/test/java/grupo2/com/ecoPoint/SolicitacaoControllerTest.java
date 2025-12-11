@@ -34,29 +34,37 @@ public class SolicitacaoControllerTest {
     private SolicitacaoService solicitacaoService;
 
     @Test
-    void criarSolicitacao() throws Exception {
+    void deveCriarUmaSolicitacao() throws Exception {
+
+        String json = """
+            {
+                "geradoraId": 1,
+                "coletoraId": 2,
+                "dataAgendada": "2025-02-10",
+                "itensIds": [5, 6]
+            }
+            """;
+
         Solicitacao solicitacao = new Solicitacao();
         solicitacao.setId(1L);
 
         when(solicitacaoService.criarSolicitacao(
-            eq(1L),
-            eq(2L),
-            eq(LocalDate.parse("2025-02-10")),
-            eq(List.of(5L, 6L))
+                eq(1L),
+                eq(2L),
+                eq(LocalDate.parse("2025-02-10")),
+                eq(List.of(5L, 6L))
         )).thenReturn(solicitacao);
 
         mockMvc.perform(post("/solicitacao")
-                .param("geradoraId", "1")
-                .param("coletoraId", "2")
-                .param("dataAgendada", "2025-02-10")
-                .param("itensIds", "5", "6"))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(json))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id").value(1L));
     }
 
 
     @Test
-    void aceitarSolicitacao() throws Exception {
+    void deveAceitarSolicitacao() throws Exception {
         Solicitacao solicitacao = new Solicitacao();
         solicitacao.setId(1L);
 
@@ -69,7 +77,7 @@ public class SolicitacaoControllerTest {
 
 
     @Test
-    void recusarSolicitacao() throws Exception {
+    void deveRecusarSolicitacao() throws Exception {
         Solicitacao solicitacao = new Solicitacao();
         solicitacao.setId(1L);
 
@@ -82,7 +90,7 @@ public class SolicitacaoControllerTest {
 
 
     @Test
-    void coletarSolicitacao() throws Exception {
+    void deveColetarSolicitacao() throws Exception {
         Solicitacao solicitacao = new Solicitacao();
         solicitacao.setId(1L);
 
@@ -94,7 +102,7 @@ public class SolicitacaoControllerTest {
     }
 
     @Test
-    void enviarCertificado() throws Exception {
+    void deveEnviarCertificado() throws Exception {
         Solicitacao solicitacao = new Solicitacao();
         solicitacao.setId(1L);
 
