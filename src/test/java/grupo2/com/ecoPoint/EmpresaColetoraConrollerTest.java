@@ -48,7 +48,7 @@ public class EmpresaColetoraConrollerTest {
 
 
     @Test
-    void retornarId() throws Exception {
+    void deveRetornarEmpresaColetoraPorId() throws Exception {
         EmpresaColetora empresa = new EmpresaColetora();
         empresa.setId(1L);
         empresa.setNome("EcoPoint");
@@ -64,7 +64,7 @@ public class EmpresaColetoraConrollerTest {
     }
 
     @Test
-    void cadastro() throws Exception {
+    void deveCadastrarUmaEmpresaColetora() throws Exception {
         String json = """
             {
             "nome": "EcoPoint",
@@ -95,7 +95,7 @@ public class EmpresaColetoraConrollerTest {
     }
 
     @Test
-    void atualizarEmpresaColetora() throws Exception {
+    void deveAtualizarEmpresaColetora() throws Exception {
         String json = """
             {
             "nome": "EcoPoint Atualizada",
@@ -120,7 +120,7 @@ public class EmpresaColetoraConrollerTest {
     }
 
     @Test
-    void loginBemSucedido() throws Exception {
+    void loginBemSucedidoAoColocarSenhaEemailCorretos() throws Exception {
         String jsonLogin = """
             {
                 "email": "ecopoint@email.com",
@@ -149,7 +149,7 @@ public class EmpresaColetoraConrollerTest {
     }
 
     @Test
-    void loginFalhaSenhaIncorreta() throws Exception {
+    void falhaNoLoginAoColocarSenhaIncorreta() throws Exception {
         String jsonLogin = """
             {
                 "email": "ecopoint@email.com",
@@ -178,7 +178,7 @@ public class EmpresaColetoraConrollerTest {
     }
 
     @Test
-    void loginFalhaEmailIncorreto() throws Exception {
+    void falhaNoLoginAoColocarEmailIncorreto() throws Exception {
         String jsonLogin = """
             {
                 "email": "naoexisto@gmail.com",
@@ -204,7 +204,7 @@ public class EmpresaColetoraConrollerTest {
     }
 
     @Test
-    void deletarEmpresaColetora() throws Exception {
+    void deveDeletarEmpresaColetoraPeloId() throws Exception {
         Mockito.doNothing().when(empresaColetoraService).deletarEmpresaColetora(1L);
 
         mockMvc.perform(delete("/empresasColetoras/1"))
